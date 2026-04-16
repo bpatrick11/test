@@ -1,0 +1,124 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+body {
+	font-family: "Roboto", sans-serif;
+	background-color: #020617;
+	color: white;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.container {
+	text-align: center;
+	background: #020617;
+	padding: 40px;
+	border-radius: 15px;
+	box-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 60px #0ff;
+	width: 350px;
+}
+.neon-line {
+	flex-grow: 1;
+	height: 2px;
+	background: linear-gradient(to right, #0ff, transparent);
+	margin: 0 10px;
+}
+.upgrade-item {
+	display: flex;
+	align-items: center;
+	margin: 10px 0;
+}
+
+.upgrade-label {
+	font-size: 1em;
+	margin-right: 10px;
+	color: #0ff;
+}
+
+#clicker {
+	margin: 20px 0;
+}
+
+#click-button {
+	width: 150px;
+	height: 150px;
+	border: none;
+	border-radius: 50%;
+	background-color: #392147;
+	cursor: pointer;
+	transition: transform 0.1s;
+}
+
+#click-button:hover {
+	transform: scale(1.1);
+}
+
+#click-button:active {
+	transform: scale(0.9);
+}
+
+#score {
+	font-size: 1.5em;
+	margin-top: 10px;
+	transition: color 0.3s;
+}
+
+.divider {
+	width: 100%;
+	height: 2px;
+	background: linear-gradient(to right, transparent, #0ff, transparent);
+	margin: 20px 0;
+}
+
+#upgrades {
+	margin-top: 30px;
+}
+
+.upgrade-button {
+	margin: 10px;
+	padding: 10px 20px;
+	font-size: 1em;
+	border: none;
+	border-radius: 10px;
+	background-color: #0ff;
+	color: #000;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.1s;
+}
+
+.upgrade-button:hover {
+	background-color: #0cf;
+	transform: scale(1.1);
+}
+
+.upgrade-button:disabled {
+	background-color: #333;
+	cursor: not-allowed;
+}
+
+footer {
+	margin-top: 20px;
+	font-size: 1em;
+}
+
+.click-effect {
+	position: absolute;
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	animation: click-animation 0.5s ease-out forwards;
+	pointer-events: none;
+}
+
+@keyframes click-animation {
+	0% {
+		transform: scale(1);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(2);
+		opacity: 0;
+	}
+}
