@@ -60,7 +60,7 @@ class Producer:
             currencypersecond += self.production
 
             # Increase price for next purchase
-            self.price = int(self.price * 1.1)
+            self.price = self.price * 3
 
         return currency
 
