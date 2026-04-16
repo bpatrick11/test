@@ -90,7 +90,9 @@ producers = [
 # --- FUNCTIONS FOR JS ---
 def increment():
     global currency
-    currency += 1
+    global currencypersecond
+
+    currency += currencypersecond
     return currency
 
 def second():
