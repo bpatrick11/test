@@ -3,6 +3,7 @@ let pyodide;
 let pyClick, pySecond, pyCPS;
 let pyBuyProducer, pyGetPrice, pyGetOwned, pyGetProduction;
 let pyIsDrainActive, pyStopDrain;
+let pyGetDrainMultiplier;
 
 async function main() {
     pyodide = await loadPyodide();
