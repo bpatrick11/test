@@ -26,7 +26,7 @@ class Drain:
         self.timeS = timeM * 60
         self.nextDrainTimerSec = self.timeS
         self.drainActive = False
-        self.drainDebuff = debuff  # multiplier (0.5 = 50%)
+        self.drainDebuff = debuff
 
     def stop_drain(self):
         self.drainActive = False
@@ -34,7 +34,7 @@ class Drain:
 
     def drain_increment_sec(self):
         if self.drainActive:
-            return  # do nothing while active
+            return
 
         self.nextDrainTimerSec -= 1
 
@@ -51,10 +51,10 @@ class Drain:
 currency = 0
 currencypersecond = 1
 
-# Drain instance (every 15s, halves CPS)
+# Drain (every 15 sec, 50% debuff)
 drain = Drain(0.25, 0.5)
 
-# Create 5 producers
+# Producers (same as your working version)
 producers = [
     Producer(10, 3),
     Producer(500, 10),
@@ -75,10 +75,9 @@ def second():
     global currency
 
     drain.drain_increment_sec()
-
     multiplier = drain.get_multiplier()
-    currency += currencypersecond * multiplier
 
+    currency += currencypersecond * multiplier
     return currency
 
 
