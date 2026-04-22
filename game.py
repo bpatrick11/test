@@ -1,4 +1,4 @@
-class Producer:
+class Producer: 
     def __init__(self, price, production):
         self.owned = 0
         self.price = price
@@ -20,12 +20,13 @@ class Producer:
 
         return currency
 
+
 class Drain:
     def __init__(self, timeM, debuff):
         self.timeS = timeM * 60
         self.nextDrainTimerSec = self.timeS
         self.drainActive = False
-        self.drainDebuff = debuff  # e.g. 0.5 = 50%
+        self.drainDebuff = debuff  # multiplier (0.5 = 50%)
 
     def stop_drain(self):
         self.drainActive = False
@@ -47,30 +48,28 @@ class Drain:
 
 
 # --- GAME STATE ---
-currency = 0 # total currency
-currencypersecond = 1 # currency added tot total per second
-minigameactive = False # if the drain minigame is active
-# should the minigame var be here or in the drain class??
+currency = 0
+currencypersecond = 1
 
-drain = Drain(0.25, 0.5)  # activates every 15s, cuts CPS in half
+# Drain instance (every 15s, halves CPS)
+drain = Drain(0.25, 0.5)
 
 # Create 5 producers
 producers = [
-    Producer(10, 3),     # Producer 1
-    Producer(500, 10),   # Producer 2
-    Producer(2500, 25),  # Producer 3
-    Producer(10000, 100),# Producer 4
-    Producer(50000, 300) # Producer 5
+    Producer(10, 3),
+    Producer(500, 10),
+    Producer(2500, 25),
+    Producer(10000, 100),
+    Producer(50000, 300)
 ]
 
 
 # --- FUNCTIONS FOR JS ---
 def increment():
     global currency
-    global currencypersecond
-
     currency += currencypersecond
     return currency
+
 
 def second():
     global currency
@@ -82,23 +81,30 @@ def second():
 
     return currency
 
+
 def CPS():
     return currencypersecond
+
 
 def buy_producer(index):
     return producers[index].purchase()
 
+
 def get_price(index):
     return producers[index].price
 
+
 def get_owned(index):
     return producers[index].owned
-    
+
+
 def get_production(index):
     return producers[index].production
 
+
 def is_drain_active():
     return drain.drainActive
+
 
 def stop_drain():
     drain.stop_drain()
