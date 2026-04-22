@@ -184,7 +184,7 @@ async function main() {
         if (drainActive) {
             let effective = cps * multiplier; // Calculate final income
             document.getElementById("CPS").innerText =
-                `"Currency Per Second:" ${cps} → ${Math.floor(effective)} (drained)`;
+                `Currency Per Second: ${cps} → ${Math.floor(effective)} (drained)`;
         } else {
             document.getElementById("CPS").innerText =
                 "Currency Per Second: " + cps;
