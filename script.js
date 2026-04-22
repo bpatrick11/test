@@ -3,6 +3,8 @@ let pyodide;
 let pyClick, pySecond, pyCPS;
 let pyBuyProducer, pyGetPrice, pyGetOwned;
 
+let pyIsDrainActive, pyStopDrain;
+
 async function main() {
     pyodide = await loadPyodide();
 
@@ -16,10 +18,17 @@ async function main() {
     pyBuyProducer = pyodide.globals.get("buy_producer");
     pyGetPrice = pyodide.globals.get("get_price");
     pyGetOwned = pyodide.globals.get("get_owned");
+    pyIsDrainActive = pyodide.globals.get("is_drain_active");
+    pyStopDrain = pyodide.globals.get("stop_drain");
 
     // Currency click
     document.getElementById("btn").onclick = () => {
         let result = pyClick();
+        updateDisplay(result);
+    };
+
+    document.getElementById("drainBtn").onclick = () => {
+        let result = pyStopDrain();
         updateDisplay(result);
     };
 
@@ -35,6 +44,14 @@ async function main() {
 
     function updateDisplay(currency) {
         let cps = pyCPS();
+        let drainActive = pyIsDrainActive();
+        let drainBtn = document.getElementById("drainBtn");
+
+        if (drainActive) {
+            drainBtn.style.display = "inline-block";
+        } else {
+            drainBtn.style.display = "none";
+        }
 
         document.getElementById("btn").innerText =
             "Currency: " + Math.floor(currency);
