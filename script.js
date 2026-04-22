@@ -65,7 +65,7 @@ async function main() {
             let effective = cps * multiplier; // actual CPS after drain
 
             document.getElementById("CPS").innerText =
-                `${cps} → ${Math.floor(effective)} (drained)`;
+                `Currency Per Second: ${cps} → ${Math.floor(effective)} (drained)`;
         } else {
             document.getElementById("CPS").innerText =
                 "Currency Per Second: " + cps;
