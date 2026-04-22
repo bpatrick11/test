@@ -59,7 +59,7 @@ async function main() {
             let drainAmount = cps - effective;
 
             document.getElementById("CPS").innerText =
-                `Currency Per Second: ${cps} (-${Math.floor(drainAmount)})`;
+                `Currency Per Second: ${cps} (- ${Math.floor(drainAmount)} (draining))`;
         } else {
             document.getElementById("CPS").innerText =
             "Currency Per Second: " + cps;
