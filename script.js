@@ -22,6 +22,7 @@ async function main() {
 
     pyIsDrainActive = pyodide.globals.get("is_drain_active");
     pyStopDrain = pyodide.globals.get("stop_drain");
+    pyGetDrainMultiplier = pyodide.globals.get("get_drain_multiplier");
 
     // Currency click
     document.getElementById("btn").onclick = () => {
@@ -47,11 +48,22 @@ async function main() {
 
     function updateDisplay(currency) {
         let cps = pyCPS();
+        let drainActive = pyIsDrainActive();
+        let multiplier = pyGetDrainMultiplier();
 
         document.getElementById("btn").innerText =
             "Currency: " + Math.floor(currency);
-        document.getElementById("CPS").innerText =
+        
+        if (drainActive) {
+            let effective = cps * multiplier;
+            let drainAmount = cps - effective;
+
+            document.getElementById("CPS").innerText =
+                `Currency Per Second: ${cps} (-${Math.floor(drainAmount)})`;
+        } else {
+            document.getElementById("CPS").innerText =
             "Currency Per Second: " + cps;
+        }
 
         // Drain button visibility (ONLY addition)
         let drainActive = pyIsDrainActive();
