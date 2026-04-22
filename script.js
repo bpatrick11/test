@@ -34,7 +34,7 @@ async function main() {
         updateDisplay(result);
     };
 
-    // Producer buttons
+    // Producer buttons (UNCHANGED from working version)
     for (let i = 0; i < 5; i++) {
         let btn = document.getElementById("prod" + i);
 
@@ -52,7 +52,7 @@ async function main() {
         document.getElementById("CPS").innerText =
             "Currency Per Second: " + cps;
 
-        // Drain button visibility
+        // Drain button visibility (ONLY addition)
         let drainActive = pyIsDrainActive();
         let drainBtn = document.getElementById("drainBtn");
 
@@ -62,7 +62,7 @@ async function main() {
             drainBtn.style.display = "none";
         }
 
-        // Producers
+        // Producers (UNCHANGED logic)
         for (let i = 0; i < 5; i++) {
             let price = pyGetPrice(i);
             let owned = pyGetOwned(i);
