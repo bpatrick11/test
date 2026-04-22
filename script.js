@@ -1,8 +1,7 @@
 let pyodide;
 
 let pyClick, pySecond, pyCPS;
-let pyBuyProducer, pyGetPrice, pyGetOwned;
-
+let pyBuyProducer, pyGetPrice, pyGetOwned, pyGetProduction;
 let pyIsDrainActive, pyStopDrain;
 
 async function main() {
@@ -18,6 +17,8 @@ async function main() {
     pyBuyProducer = pyodide.globals.get("buy_producer");
     pyGetPrice = pyodide.globals.get("get_price");
     pyGetOwned = pyodide.globals.get("get_owned");
+    pyGetProduction = pyodide.globals.get("get_production");
+
     pyIsDrainActive = pyodide.globals.get("is_drain_active");
     pyStopDrain = pyodide.globals.get("stop_drain");
 
@@ -27,6 +28,7 @@ async function main() {
         updateDisplay(result);
     };
 
+    // Drain button
     document.getElementById("drainBtn").onclick = () => {
         let result = pyStopDrain();
         updateDisplay(result);
@@ -44,6 +46,13 @@ async function main() {
 
     function updateDisplay(currency) {
         let cps = pyCPS();
+
+        document.getElementById("btn").innerText =
+            "Currency: " + Math.floor(currency);
+        document.getElementById("CPS").innerText =
+            "Currency Per Second: " + cps;
+
+        // Drain button visibility
         let drainActive = pyIsDrainActive();
         let drainBtn = document.getElementById("drainBtn");
 
@@ -53,17 +62,13 @@ async function main() {
             drainBtn.style.display = "none";
         }
 
-        document.getElementById("btn").innerText =
-            "Currency: " + Math.floor(currency);
-        document.getElementById("CPS").innerText =
-            "Currency Per Second: " + cps;
-
+        // Producers
         for (let i = 0; i < 5; i++) {
             let price = pyGetPrice(i);
             let owned = pyGetOwned(i);
             let producing = pyGetProduction(i);
             let btn = document.getElementById("prod" + i);
-            let total = producing*owned
+            let total = producing * owned;
 
             // Unlock next producer
             if (i === 0 || pyGetOwned(i - 1) > 0) {
@@ -73,7 +78,7 @@ async function main() {
             if (owned === 0) {
                 btn.innerText = `Buy Producer ${i + 1} (${price})`;
             } else {
-                btn.innerText = `Upgrade Producer ${i + 1} (${price}) | Owned: ${owned} | Producing: ${producing} per second each,  ${total} in total `;
+                btn.innerText = `Upgrade Producer ${i + 1} (${price}) | Owned: ${owned} | Producing: ${producing} each, ${total} total`;
             }
         }
     }
