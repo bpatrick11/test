@@ -45,9 +45,7 @@ class Drain:
         if self.drainActive:
             return self.drainDebuff
         return 1
-        
-    def get_drain_multiplier():
-        return drain.get_multiplier()
+
 
 # --- GAME STATE ---
 currency = 0
@@ -106,6 +104,8 @@ def get_production(index):
 def is_drain_active():
     return drain.drainActive
 
+def get_drain_multiplier():
+        return drain.get_multiplier()
 
 def stop_drain():
     drain.stop_drain()
